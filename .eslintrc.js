@@ -8,7 +8,7 @@ module.exports = {
     browser: true,
     node: true
   },
-  extends: 'standard',
+  //extends: 'standard',
   globals: {
     __static: true
   },
