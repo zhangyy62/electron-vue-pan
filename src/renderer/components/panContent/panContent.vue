@@ -1,10 +1,20 @@
 <template>
-    <div class="panContent"></div>
+    <div class="panContent">
+        <sideBar></sideBar>
+        <mainContent></mainContent>
+    </div>
 </template>
 
 <script>
+import sideBar from '../sideBar/sideBar'
+import mainContent from '../mainContent/mainContent'
+
 export default {
-    name: 'panContent'
+    name: 'panContent',
+     components: { 
+        sideBar, 
+        mainContent 
+    },
 }
 </script>
 
