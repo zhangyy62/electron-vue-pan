@@ -6,7 +6,7 @@
     border-bottom-width: 1px;
 
     .nav-buttons {
-        position: relative;
+        position: fixed;
         display: block;
         margin-left: 8px;
         top: 30px;
@@ -21,8 +21,9 @@
     }
     
     .function-buttons {
-        position: relative;
+        position: fixed;
         left: 200px;
+        top: 20px;
 
         .upload {
             width: 80px;
@@ -43,5 +44,31 @@
             background: white;
             border-radius: 5px;
         }
+    }
+
+    .function-right-buttons {
+        float: right;
+        position: fixed;
+        top: 30px;
+        right: 5px;
+        display: inline-flex;
+
+       .search {
+           width: 190px;
+           margin-right: 5px;
+       }
+
+       .button {
+            width: 25px;
+            height: 25px;
+            border: 0.5px;
+            background: white;
+            border-radius: 5px;
+            margin-right: 5px;
+       }
+
+       .refresh {
+           margin-left: 5px;
+       }
     }
 }

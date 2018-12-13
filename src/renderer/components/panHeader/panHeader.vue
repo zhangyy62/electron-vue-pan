@@ -8,6 +8,12 @@
             <input type="button" class="upload"  value="上传"/>
             <input type="button" class="new-file"  value="新建文件夹"/>
         </div>
+        <div class="function-right-buttons">
+            <input type="search" class="search" placeholder="搜索"/>
+            <input type="button" class="button"   value=""/>
+            <input type="button"  class="button"  value=""/>
+            <input type="button" class="button refresh"  value=""/>
+        </div>
     </div>
 </template>
 
