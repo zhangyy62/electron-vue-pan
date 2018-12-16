@@ -2,7 +2,11 @@
     <div class="side-bar">
         <div class="infoCard">
             <div>{{name}}</div>
-            <div>test</div>
+            <div>
+                <div class="progress">
+	                <div class="bar" style="width: 20%;"></div>
+                </div>
+            </div>
             <div>{{usedVolumn}}/{{totalVolumn}}
                 <span>扩容</span>
             </div>
@@ -62,6 +66,35 @@ export default {
         div {
             padding-left: 20px;
 
+            .progress {
+                padding-top: 0;
+                padding-left: 0;
+                overflow: hidden;
+                height: 10px;
+                background-color: #f7f7f7;
+                background-repeat: repeat-x;
+                box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+                border-radius: 4px;
+                margin-right:12px;
+            }
+        
+            .progress .bar {
+                width: 20%;
+                height: 100%;
+                color: #ffffff;
+                float: left;
+                font-size: 12px;
+                text-align: center;
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+                background-color: rgb(101, 194, 73);
+                background-repeat: repeat-x;
+                box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+                box-sizing: border-box;
+                transition: width 0.2s ease;
+            }
         }
 
         div:last-child {
