@@ -11,10 +11,10 @@ import mainContent from '../mainContent/mainContent'
 
 export default {
     name: 'panContent',
-     components: { 
+    components: { 
         sideBar, 
         mainContent 
-    },
+    }
 }
 </script>
 

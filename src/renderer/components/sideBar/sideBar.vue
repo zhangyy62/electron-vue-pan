@@ -72,6 +72,7 @@ export default {
         div:first-child {
             padding-top: 10px;
             padding-left: 20px;
+            margin-bottom: 5px;
             font-size: 14px;
         }
 
@@ -82,7 +83,7 @@ export default {
                 padding-top: 0;
                 padding-left: 0;
                 overflow: hidden;
-                height: 10px;
+                height: 5px;
                 background-color: #f7f7f7;
                 background-repeat: repeat-x;
                 box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
