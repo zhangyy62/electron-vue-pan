@@ -1,5 +1,5 @@
 .pan-header {
-    min-height: 60px;
+    min-height: 50px;
     width: 100%;
     background: rgb(244, 244, 244);
     border: 0 solid rgb(211, 211, 211);
@@ -7,7 +7,7 @@
 
     &>div {
         position: relative;
-        top: 30px;
+        top: 20px;
     }
 
     .nav-buttons {

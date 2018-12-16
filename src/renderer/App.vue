@@ -14,6 +14,9 @@
   /* CSS */
   body {
     height: 100vh;
+    min-width: 960px;
+    min-height: 650px;
+    font-size: 12px;
   }
 
   #app {
