@@ -39,6 +39,7 @@ export default {
     .main-content {
         height: 100%;
         width: 100%;
+        background: rgb(244, 244, 244);
 
         .content-title {
             width: 100%;
@@ -62,8 +63,6 @@ export default {
         }
 
         .content {
-            height: 100%;
-            min-height: 732px;
             background: rgb(244, 244, 244);
         }
     }
