@@ -33,6 +33,7 @@
             top: 10px;
             background: rgb(77, 137, 247);
             border-radius: 5px;
+            color: white;
         }
 
         .new-file {
@@ -42,7 +43,9 @@
             position: relative;
             top: 10px;
             background: white;
+            margin-left: 5px;
             border-radius: 5px;
+            color: rgb(107, 107, 107);
         }
     }
 
@@ -56,6 +59,7 @@
        .search {
            width: 190px;
            margin-right: 5px;
+           box-sizing: content-box;
        }
 
        .button {
