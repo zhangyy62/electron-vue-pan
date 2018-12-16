@@ -4,7 +4,7 @@
             <div>{{name}}</div>
             <div>
                 <div class="progress">
-	                <div class="bar" style="width: 20%;"></div>
+	                <div class="bar"></div>
                 </div>
             </div>
             <div>{{usedVolumn}}/{{totalVolumn}}
@@ -79,6 +79,7 @@ export default {
             }
         
             .progress .bar {
+                padding-left: 0;
                 width: 20%;
                 height: 100%;
                 color: #ffffff;
@@ -93,7 +94,7 @@ export default {
                 background-repeat: repeat-x;
                 box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
                 box-sizing: border-box;
-                transition: width 0.2s ease;
+                transition: width 5s ease;
             }
         }
 
