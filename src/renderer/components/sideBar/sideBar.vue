@@ -3,8 +3,8 @@
         <div class="infoCard">
             <div>{{name}}</div>
             <div>
-                <div class="progress">
-	                <div class="bar"></div>
+                <div class="progress" v-on:click="clickProgress" >
+	                <div class="bar"  v-bind:style="progress"></div>
                 </div>
             </div>
             <div>{{usedVolumn}}/{{totalVolumn}}
@@ -32,6 +32,11 @@
 <script>
 export default {
     name: 'sideBar',
+    computed:{
+        progress() {
+            return `width: ${this.progressValue}%` ;
+        }
+    },
     data() {
         return {
             name: 'test账户',
@@ -39,12 +44,19 @@ export default {
             totalVolumn: '500G',
             meunOne: '全部文件',
             meunTwo: ['正在上传', '正在下载', '传输完成'],
+            progressValue: Math.random() * 100
+        }
+    },
+    methods: {
+        clickProgress() {
+            this.progressValue = Math.random() * 100;
         }
     }
 }
 </script>
 
 <style lang="scss">
+
 .side-bar {
     min-width: 200px;
     width: 200px;
@@ -80,7 +92,7 @@ export default {
         
             .progress .bar {
                 padding-left: 0;
-                width: 20%;
+                width: (random(100) /100 )* 100%;
                 height: 100%;
                 color: #ffffff;
                 float: left;
