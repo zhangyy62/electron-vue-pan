@@ -117,6 +117,7 @@ export default {
         position: absolute;
         width: 200px;
         text-align: center;
+        margin-bottom: 30px;
 
         a {
             border: 0 solid rgb(218, 96, 75);

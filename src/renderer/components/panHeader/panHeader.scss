@@ -5,11 +5,14 @@
     border: 0 solid rgb(211, 211, 211);
     border-bottom-width: 1px;
 
-    .nav-buttons {
-        position: fixed;
-        display: block;
-        margin-left: 8px;
+    &>div {
+        position: relative;
         top: 30px;
+    }
+
+    .nav-buttons {
+        margin-left: 8px;
+        display: inline-block;
 
         input {
             width: 25px;
@@ -21,16 +24,14 @@
     }
     
     .function-buttons {
-        position: fixed;
-        left: 200px;
-        top: 20px;
+       margin-left: 140px;
+       display: inline-block;
 
         .upload {
             width: 80px;
             height: 20px;
             border: 0.5px;
             position: relative;
-            top: 10px;
             background: rgb(77, 137, 247);
             border-radius: 5px;
             color: white;
@@ -41,7 +42,6 @@
             height: 20px;
             border: 0.5px;
             position: relative;
-            top: 10px;
             background: white;
             margin-left: 5px;
             border-radius: 5px;
@@ -50,11 +50,8 @@
     }
 
     .function-right-buttons {
-        float: right;
-        position: fixed;
-        top: 30px;
-        right: 5px;
-        display: inline-flex;
+       display: inline-flex;
+       float: right;
 
        .search {
            width: 190px;

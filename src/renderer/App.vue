@@ -10,6 +10,19 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   /* CSS */
+  body {
+    height: 100vh;
+  }
+
+  #app {
+    height: 100%;
+  }
+
+  .clearfix:after {
+    content: ''; 
+    display:block; 
+    clear:both;
+  }
 </style>
