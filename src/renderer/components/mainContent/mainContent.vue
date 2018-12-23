@@ -5,7 +5,7 @@
             <span>已全部加载，共{{totalFileCount}}个</span>
         </div>
         <div class="content">
-            <vTable  :data="gridData" :columns="gridColumns" :filter-key="searchQuery"></vTable>
+            <router-view :data="gridData" :columns="gridColumns" :filter-key="searchQuery"></router-view> 
         </div>
     </div>
 </template>

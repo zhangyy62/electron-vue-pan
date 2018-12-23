@@ -8,7 +8,20 @@ export default new Router({
     {
       path: '/',
       name: 'landing-page',
-      component: require('@/components/LandingPage').default
+      redirect: '/table',
+      component: require('@/components/LandingPage').default,
+      children : [
+        {
+          path: '/table',
+          name: 'table',
+          component: require('@/basic/v-bigIconList/v-bigIconList').default
+        },
+        {
+          path: '/bar',
+          name: 'bar',
+          component: require('@/basic/v-table/v-table').default
+        }
+      ]
     },
     {
       path: '*',
