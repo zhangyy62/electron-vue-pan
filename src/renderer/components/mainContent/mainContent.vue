@@ -29,7 +29,8 @@ export default {
             gridColumns: ['name', 'size', 'date'],
             gridData: null,
             mainContentController,
-            rowDatas: null
+            rowDatas: null,
+            screenWidth: document.body.offsetWidth
         }
     },
     created() {
@@ -40,6 +41,14 @@ export default {
             this.rowDatas = this.mainContentController.computeRows(result.data);
             console.log(this.rowDatas);
         })
+    },
+    mounted() {
+        const that = this;
+        window.onresize = function temp() {
+            if (that.gridData) {
+                that.rowDatas = that.mainContentController.computeRows(that.gridData);
+            }
+        };
     }
 }
 </script>
@@ -49,6 +58,7 @@ export default {
         height: 100%;
         width: 100%;
         background: rgb(244, 244, 244);
+        overflow: auto;
 
         .content-title {
             width: 100%;
@@ -57,6 +67,8 @@ export default {
             background: white;
             border: 0 solid rgb(211, 211, 211);
             border-bottom-width: 1px;
+            position: fixed;
+            z-index: 9999;
 
             span {
                 margin-left: 10px;
@@ -73,6 +85,7 @@ export default {
 
         .content {
             background: rgb(244, 244, 244);
+            margin-top: 25px;
         }
     }
 

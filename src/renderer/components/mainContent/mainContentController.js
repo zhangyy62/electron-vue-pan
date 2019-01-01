@@ -2,7 +2,7 @@ class mainContentController {
 
     computeRows(datas) {
         let width = document.body.offsetWidth - 200;
-        let rowFiles = Math.floor(width % 128);
+        let rowFiles = Math.floor(width / 128);
         let rowCount = Math.floor(datas.length / rowFiles);
 
         let rowsDatas = [], rowData = [], count = 0, row = 0;
