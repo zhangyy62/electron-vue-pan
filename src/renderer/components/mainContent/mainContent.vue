@@ -13,7 +13,7 @@
 <script>
 import vTable from '@/basic/v-table/v-table'
 import vbigIconList from '@/basic/v-bigIconList/v-bigIconList'
-import mainContentController from './mainContent.js';
+import mainContentController from './mainContentController.js';
 
 
 export default {
@@ -39,7 +39,6 @@ export default {
             this.gridData = result.data;
             this.rowDatas = this.mainContentController.computeRows(result.data);
             console.log(this.rowDatas);
-            debugger;
         })
     }
 }
