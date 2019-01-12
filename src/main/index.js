@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, Menu, screen, ipcMain } from 'electron'
 
 /**
  * Set `__static` path to static files in production
@@ -10,10 +10,15 @@ if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
 
-let mainWindow
+let mainWindow, floatingWindows;
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
+
+const floatingWinURL = process.env.NODE_ENV === 'development'
+  ? `http://localhost:9080/#/floating/window`
+  : `file://${__dirname}/index.html`
+
 
 function createWindow () {
   /**
@@ -32,6 +37,10 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+  const menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
+  if (floatingWindows) floatingWindows.close()
 }
 
 app.on('ready', createWindow)
@@ -47,6 +56,134 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+const template = [
+  {
+    label: 'Edit',
+    submenu: [
+      { role: 'undo' },
+      { role: 'redo' },
+      { type: 'separator' },
+      { role: 'cut' },
+      { role: 'copy' },
+      { role: 'paste' },
+      { role: 'pasteandmatchstyle' },
+      { role: 'delete' },
+      { role: 'selectall' }
+    ]
+  },
+  {
+    label: 'View',
+    submenu: [
+      { role: 'reload' },
+      { role: 'forcereload' },
+      { role: 'toggledevtools' },
+      { type: 'separator' },
+      { role: 'resetzoom' },
+      { role: 'zoomin' },
+      { role: 'zoomout' },
+      { type: 'separator' },
+      { role: 'togglefullscreen' }
+    ]
+  },
+  {
+    role: 'window',
+    submenu: [
+      { role: 'minimize' },
+      { role: 'close' }
+    ]
+  },
+  {
+    role: 'help',
+    submenu: [
+      {
+        label: 'Learn More',
+        click () { require('electron').shell.openExternal('https://electronjs.org') }
+      }
+    ]
+  },
+  {
+    label: '自主测试',
+    submenu: [
+      {
+        label: '悬浮框',
+        click () { 
+          mainWindow.close()
+          floatingWindows = new BrowserWindow({
+            width: 140, //悬浮窗口的宽度 比实际DIV的宽度要多2px 因为有1px的边框
+            height: 30, //悬浮窗口的高度 比实际DIV的高度要多2px 因为有1px的边框
+            type: 'toolbar',    //创建的窗口类型为工具栏窗口
+            frame: false,   //要创建无边框窗口
+            // resizable: false, //禁止窗口大小缩放
+            show: false,    //先不让窗口显示
+            webPreferences: {
+                devTools: false //关闭调试工具
+            },
+            transparent: true,  //设置透明
+            alwaysOnTop: true,  //窗口是否总是显示在其他窗口之前
+          });
+          const size = screen.getPrimaryDisplay().workAreaSize;   //获取显示器的宽高
+          const winSize = floatingWindows.getSize();  //获取窗口宽高
+      
+          //设置窗口的位置 注意x轴要桌面的宽度 - 窗口的宽度
+          floatingWindows.setPosition(size.width - winSize[0], 100);
+          floatingWindows.loadURL(floatingWinURL);
+      
+          floatingWindows.once('ready-to-show', () => {
+            floatingWindows.show()
+          });
+      
+          floatingWindows.on('close', () => {
+            floatingWindows = null;
+          })
+        }
+      }
+    ]
+  },
+]
+
+if (process.platform === 'darwin') {
+  template.unshift({
+    label: app.getName(),
+    submenu: [
+      { role: 'about' },
+      { type: 'separator' },
+      { role: 'services' },
+      { type: 'separator' },
+      { role: 'hide' },
+      { role: 'hideothers' },
+      { role: 'unhide' },
+      { type: 'separator' },
+      { role: 'quit' }
+    ]
+  })
+
+  // Edit menu
+  template[1].submenu.push(
+    { type: 'separator' },
+    {
+      label: 'Speech',
+      submenu: [
+        { role: 'startspeaking' },
+        { role: 'stopspeaking' }
+      ]
+    }
+  )
+
+  // Window menu
+  template[3].submenu = [
+    { role: 'close' },
+    { role: 'minimize' },
+    { role: 'zoom' },
+    { type: 'separator' },
+    { role: 'front' }
+  ]
+}
+
+ipcMain.on('showMainWindow', () => {
+  floatingWindows.close();
+  createWindow()
+});
 
 /**
  * Auto Updater
