@@ -1,5 +1,5 @@
 <template>
-    <div id="floating-window">
+    <div id="floatingWindow">
         <div class="logo"></div>
         <div class="content">
             <div class="text">拖拽上传</div>
@@ -8,34 +8,15 @@
 </template>
 
 <script>
+const drag = require('electron-drag');
+
 export default {
     name: "floatingWindow",
     mounted() {
-        let win = this.$electron.remote.getCurrentWindow();
-        let biasX = 0;
-        let biasY = 0;
-        let that = this;
-        document.addEventListener('mousedown', function (e) {
-            switch (e.button) {
-                case 0:
-                    biasX = e.x;
-                    biasY = e.y;
-                    document.addEventListener('mousemove', moveEvent);
-                    break;
-                case 2:
-                    that.$electron.ipcRenderer.send('createSuspensionMenu');
-                    break;
-            }
-        });
+        drag('#floatingWindow');
 
-        document.addEventListener('mouseup', function () {
-            biasX = 0;
-            biasY = 0;
-            document.removeEventListener('mousemove', moveEvent)
-        });
-
-        function moveEvent(e) {
-            win.setPosition(e.screenX - biasX, e.screenY - biasY)
+        if(!drag.supported) {
+            document.querySelector('#floatingWindow').style['-webkit-app-region'] = 'drag';
         }
     }
 }
@@ -65,13 +46,13 @@ export default {
         width: 100px;
     }
 
-    #floating-window {
+    #floatingWindow {
         -webkit-user-select: none;
         cursor: pointer;
         overflow: hidden;
     }
 
-    #floating-window {
+    #floatingWindow {
         cursor: pointer !important;
         height: 25px;
         width: 140px;
