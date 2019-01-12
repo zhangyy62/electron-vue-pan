@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, BrowserWindow, Menu, screen } from 'electron'
+import { app, BrowserWindow, Menu, screen, ipcMain } from 'electron'
 
 /**
  * Set `__static` path to static files in production
@@ -40,7 +40,7 @@ function createWindow () {
 
   const menu = Menu.buildFromTemplate(template)
   Menu.setApplicationMenu(menu)
-  floatingWindows.close()
+  if (floatingWindows) floatingWindows.close()
 }
 
 app.on('ready', createWindow)
@@ -180,6 +180,10 @@ if (process.platform === 'darwin') {
   ]
 }
 
+ipcMain.on('showMainWindow', () => {
+  floatingWindows.close();
+  createWindow()
+});
 
 /**
  * Auto Updater
