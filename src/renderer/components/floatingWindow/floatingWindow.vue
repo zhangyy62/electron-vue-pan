@@ -54,7 +54,7 @@ export default {
 
     #floatingWindow {
         cursor: pointer !important;
-        height: 25px;
+        height: 28px;
         width: 140px;
         border-radius: 4px;
         display: flex;

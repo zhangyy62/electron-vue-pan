@@ -111,7 +111,7 @@ const template = [
           mainWindow.close()
           floatingWindows = new BrowserWindow({
             width: 140, //悬浮窗口的宽度 比实际DIV的宽度要多2px 因为有1px的边框
-            height: 28, //悬浮窗口的高度 比实际DIV的高度要多2px 因为有1px的边框
+            height: 30, //悬浮窗口的高度 比实际DIV的高度要多2px 因为有1px的边框
             type: 'toolbar',    //创建的窗口类型为工具栏窗口
             frame: false,   //要创建无边框窗口
             // resizable: false, //禁止窗口大小缩放
