@@ -24,6 +24,11 @@ export default new Router({
       ]
     },
     {
+      path: '/floating/window',
+      name: 'floating-window',
+      component: require('@/components/floatingWindow/floatingWindow').default
+    },
+    {
       path: '*',
       redirect: '/'
     }
