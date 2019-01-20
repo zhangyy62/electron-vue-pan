@@ -2,21 +2,50 @@
     <div>
         <dd v-for="rowDatas in bigIconDatas">
             <template v-for="file in rowDatas" >
-                <div class="container" v-bind:class="file.isChecked ? 'container-checked ' : ''" @click="onClick(file)">
+                <div @contextmenu="showMenu($event)" class="container" v-bind:class="file.isChecked ? 'container-checked ' : ''" @click="onClick(file)">
                     <div class="img-container" v-bind:class="getClass(file)"><img src=""></img></div>
                     <div><i>{{file.name}}</i></div>
                 </div>
             </template>
         </dd>
+        <v-context-menu :contextMenuData="contextMenuData"
+	                  @savedata="savedata"
+	                  @newdata="newdata" @download="download">
+        </v-context-menu>
     </div>
 </template>
 
 <script>
+import vContextMenu from '@/basic/v-contextMenu/v-contextMenu';
+
 export default {
     name: 'v-bigIconList',
+    components: {
+        vContextMenu
+    },
     data() {
         return {
-            currentCheckedFile: null
+            currentCheckedFile: null,
+            contextMenuData: {
+                menuName: 'demo',
+                axis: {
+                    x: null,
+                    y: null
+                },
+                // Menu options (菜单选项)
+                menulists: [
+                    {
+                        fnHandler: 'savedata',
+                        icoName: 'fa fa-home fa-fw',
+                        btnName: '打开'
+                    },
+                    {
+                        fnHandler: 'download',
+                        icoName: 'fa fa-home fa-fw',
+                        btnName: '下载'
+                    }
+                ]
+            }
         };
     },
     props: {
@@ -44,6 +73,24 @@ export default {
             console.log(file);
             innerFile.isChecked = !innerFile.isChecked;
             this.currentCheckedFile = file;
+        },
+        savedata() {
+            alert(1);
+        },
+        newdata() {
+            console.log('newdata!');
+        },
+        download() {
+            alert(`download:${this.currentCheckedFile.name}`);
+        },
+        showMenu(event) {
+            event.preventDefault();
+            const x = event.clientX;
+            const y = event.clientY;
+            // Get the current location
+            this.contextMenuData.axis = {
+                x, y
+            };
         }
     }
 };
@@ -82,6 +129,10 @@ export default {
             height: 84px;
             background-repeat: no-repeat;
             overflow: hidden;
+        }
+        i {
+            font: 12px/1.5 "Microsoft YaHei", arial, SimSun, 宋体;
+            color: #424e67;
         }
     }
     .dir-img {

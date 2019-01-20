@@ -12,7 +12,7 @@
 
 <script>
 import vTable from '@/basic/v-table/v-table';
-import vbigIconList from '@/basic/v-bigIconList/v-bigIconList';
+import vbigIconList from '@/components/v-bigIconList/v-bigIconList';
 import MainContentController from './mainContentController.js';
 
 export default {
@@ -55,7 +55,7 @@ export default {
     .main-content {
         height: 100%;
         width: 100%;
-        background: rgb(244, 244, 244);
+        background: rgb(255, 255, 255);
         overflow: auto;
 
         .content-title {
@@ -82,7 +82,7 @@ export default {
         }
 
         .content {
-            background: rgb(244, 244, 244);
+            background: rgb(255, 255, 255);
             margin-top: 25px;
         }
     }

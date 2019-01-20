@@ -13,7 +13,7 @@ export default new Router({
         children: [{
             path: '/table',
             name: 'table',
-            component: require('@/basic/v-bigIconList/v-bigIconList').default
+            component: require('@/components/v-bigIconList/v-bigIconList').default
         },
         {
             path: '/bar',
