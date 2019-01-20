@@ -8,8 +8,10 @@ class MainContentController {
         let count = 0;
         let row = 0;
         datas.forEach(data => {
+            let innerData = data;
+            innerData = Object.assign({}, innerData, { isChecked: false });
             if (row <= rowFiles) {
-                rowData.push(data);
+                rowData.push(innerData);
                 row += 1;
             } else if (count <= rowCount) {
                 rowsDatas.push(rowData);
