@@ -8,7 +8,7 @@ module.exports = {
     browser: true,
     node: true
   },
-  //extends: 'standard',
+  extends: 'airbnb',
   globals: {
     __static: true
   },
@@ -21,6 +21,11 @@ module.exports = {
     // allow async-await
     'generator-star-spacing': 0,
     // allow debugger during development
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+    'indent': [2, 4],
+    'comma-dangle': [2, 'never'],
+    'no-plusplus': ["error", { 'allowForLoopAfterthoughts': true }],
+    'import/no-unresolved': 0,
+    'import/extensions': 'off'
   }
 }

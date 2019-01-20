@@ -8,24 +8,22 @@
 </template>
 
 <script>
-const drag = require("electron-drag");
+const drag = require('electron-drag');
 
 export default {
-  name: "floatingWindow",
-  mounted() {
-    drag("#floatingWindow");
+    name: 'floatingWindow',
+    mounted() {
+        drag('#floatingWindow');
 
-    if (!drag.supported) {
-      document.querySelector("#floatingWindow").style["-webkit-app-region"] =
-        "drag";
+        if (!drag.supported) {
+            document.querySelector('#floatingWindow').style['-webkit-app-region'] = 'drag';
+        }
+    },
+    methods: {
+        clickFLWIN() {
+            this.$electron.ipcRenderer.send('showMainWindow');
+        }
     }
-  },
-  methods: {
-    clickFLWIN() {
-        console.log("dbclick");
-        this.$electron.ipcRenderer.send('showMainWindow');
-    }
-  }
 };
 </script>
 

@@ -22,7 +22,7 @@
 <script>
 export default {
     name: 'panHeader'
-}
+};
 </script>
 
 <style lang="scss">

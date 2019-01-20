@@ -5,9 +5,9 @@
 </template>
 
 <script>
-  export default {
-    name: 'pan'
-  }
+    export default {
+        name: 'pan'
+    };
 </script>
 
 <style lang="scss">

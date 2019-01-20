@@ -11,10 +11,9 @@
 </template>
 
 <script>
-import vTable from '@/basic/v-table/v-table'
-import vbigIconList from '@/basic/v-bigIconList/v-bigIconList'
-import mainContentController from './mainContentController.js';
-
+import vTable from '@/basic/v-table/v-table';
+import vbigIconList from '@/basic/v-bigIconList/v-bigIconList';
+import MainContentController from './mainContentController.js';
 
 export default {
     name: 'mainContent',
@@ -28,29 +27,28 @@ export default {
             searchQuery: '',
             gridColumns: ['name', 'size', 'date'],
             gridData: null,
-            mainContentController,
+            MainContentController,
             rowDatas: null,
             screenWidth: document.body.offsetWidth
-        }
+        };
     },
     created() {
-        this.$http.get('/static/mock/fileList.json', {})
-        .then((result) => {
+        this.$http.get('/static/mock/fileList.json', {}).then((result) => {
             console.log(result);
             this.gridData = result.data;
-            this.rowDatas = this.mainContentController.computeRows(result.data);
+            this.rowDatas = this.MainContentController.computeRows(result.data);
             console.log(this.rowDatas);
-        })
+        });
     },
     mounted() {
         const that = this;
         window.onresize = function temp() {
             if (that.gridData) {
-                that.rowDatas = that.mainContentController.computeRows(that.gridData);
+                that.rowDatas = that.MainContentController.computeRows(that.gridData);
             }
         };
     }
-}
+};
 </script>
 
 <style lang="scss">

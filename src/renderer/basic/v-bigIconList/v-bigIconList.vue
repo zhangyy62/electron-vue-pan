@@ -14,13 +14,8 @@ export default {
     name: 'v-bigIconList',
     props: {
         bigIconDatas: Array
-    },
-    data() {
-        return {
-            
-        }
     }
-}
+};
 </script>
 
 <style lang="scss">

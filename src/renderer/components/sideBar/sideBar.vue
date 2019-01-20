@@ -32,9 +32,9 @@
 <script>
 export default {
     name: 'sideBar',
-    computed:{
+    computed: {
         progress() {
-            return `width: ${this.progressValue}%` ;
+            return `width: ${this.progressValue}%`;
         }
     },
     data() {
@@ -45,14 +45,14 @@ export default {
             meunOne: '全部文件',
             meunTwo: ['正在上传', '正在下载', '传输完成'],
             progressValue: Math.random() * 100
-        }
+        };
     },
     methods: {
         clickProgress() {
             this.progressValue = Math.random() * 100;
         }
     }
-}
+};
 </script>
 
 <style lang="scss">
