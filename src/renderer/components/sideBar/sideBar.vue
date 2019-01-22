@@ -12,10 +12,14 @@
             </div>
         </div>
         <div class="menu-list">
-            <p>{{meunOne}}</p>
+            <div v-bind:class="routeName === 'all' ? 'selected' : ''">
+                <!-- <a >{{menuOne}}</a> -->
+                <router-link to="/home/all/table">{{menuOne.name}}</router-link>
+            </div>
+            
             <ul> <span>传输列表</span>
-                <li v-for = "item in meunTwo">
-                    {{item}}
+                <li v-for = "item in menuTwo" v-bind:class="routeName === item.key ? 'selected' : ''">
+                    <router-link v-bind:to="item.route">{{item.name}}</router-link>
                 </li>
             </ul>
         </div>
@@ -35,6 +39,9 @@ export default {
     computed: {
         progress() {
             return `width: ${this.progressValue}%`;
+        },
+        routeName() {
+            return this.$route.name;
         }
     },
     data() {
@@ -42,14 +49,63 @@ export default {
             name: 'test账户',
             usedVolumn: '100G',
             totalVolumn: '500G',
-            meunOne: '全部文件',
-            meunTwo: ['正在上传', '正在下载', '传输完成'],
+            menuOne: {
+                name: '全部文件',
+                isChecked: false
+            },
+            menuTwo: [
+                {
+                    name: '正在上传',
+                    key: 'uploading',
+                    route: '/home/uploading',
+                    isChecked: false
+                },
+                {
+                    name: '正在下载',
+                    key: 'downloading',
+                    route: '/home/downloading',
+                    isChecked: false
+                },
+                {
+                    name: '传输完成',
+                    key: 'downloaded',
+                    route: '/home/downloaded',
+                    isChecked: false
+                }
+            ],
             progressValue: Math.random() * 100
         };
     },
     methods: {
         clickProgress() {
             this.progressValue = Math.random() * 100;
+        }
+    },
+    watch: {
+        $route(to, from) {
+            console.log(to, from);
+            // if (to.name === 'all') {
+            //     this.menuOne.isChecked = true;
+            // } else {
+            //     this.menuTwo.forEach(item => {
+            //         const that = item;
+            //         that.isChecked = false;
+            //     });
+            // }
+            // console.log(this.menuTwo);
+            // if (to.name !== 'all') {
+            //     this.menuOne.isChecked = false;
+            // } else {
+            //     this.menuTwo.forEach(item => {
+            //         console.log(item);
+            //         const that = item;
+            //         if (that.key === to.name) {
+            //             that.isChecked = true;
+            //         } else {
+            //             that.isChecked = false;
+            //         }
+            //     });
+            // }
         }
     }
 };
@@ -151,11 +207,21 @@ export default {
             }
         }
 
-        p {
+        div {
             padding: 10px 0 10px 45px;
+           
             &:hover {
                 background: rgb(229, 229, 229);
             }
+        }
+
+         a {
+                text-decoration: none;
+                color: #484848;
+        }
+
+        .selected {
+            background: rgb(229, 229, 229);
         }
     }
 

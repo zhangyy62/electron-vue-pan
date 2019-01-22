@@ -14,7 +14,7 @@ if (process.env.NODE_ENV !== 'development') {
 let mainWindow;
 let floatingWindows;
 const winURL = process.env.NODE_ENV === 'development'
-    ? `http://localhost:9080`
+    ? `http://localhost:9080/#/home/all/table`
     : `file://${__dirname}/index.html`;
 
 const floatingWinURL = process.env.NODE_ENV === 'development'
