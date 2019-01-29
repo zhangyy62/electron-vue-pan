@@ -4,16 +4,16 @@
 
 <script>
   // import SystemInformation from './LandingPage/SystemInformation'
-  import mainPage from './mainPage/mainPage'
+  import mainPage from './mainPage/mainPage';
 
   export default {
-    name: 'landing-page',
-    components: { mainPage },
-    methods: {
-      open (link) {
-        this.$electron.shell.openExternal(link)
+      name: 'landing-page',
+      components: { mainPage },
+      methods: {
+          open(link) {
+              this.$electron.shell.openExternal(link);
+          }
       }
-    }
   };
 </script>
 

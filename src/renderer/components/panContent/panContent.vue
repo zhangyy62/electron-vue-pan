@@ -6,16 +6,16 @@
 </template>
 
 <script>
-import sideBar from '../sideBar/sideBar'
-import mainContent from '../mainContent/mainContent'
+import sideBar from '../sideBar/sideBar';
+import mainContent from '../mainContent/mainContent';
 
 export default {
     name: 'panContent',
-    components: { 
-        sideBar, 
-        mainContent 
+    components: {
+        sideBar,
+        mainContent
     }
-}
+};
 </script>
 
 <style lang="scss">

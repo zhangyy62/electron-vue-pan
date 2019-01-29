@@ -3,7 +3,7 @@ import axios from 'axios';
 import App from 'App.vue';
 import router from './router';
 import store from './store';
-import vContextMenu from '@/basic/v-contextMenu/v-contextMenu.vue';
+import vContextMenu from '@/basic/v-contextMenu/v-contextMenu';
 import electron from 'vue-electron';
 /* eslint-disable */
 if (!process.env.IS_WEB) Vue.use(electron);

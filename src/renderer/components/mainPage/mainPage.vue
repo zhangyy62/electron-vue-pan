@@ -6,21 +6,21 @@
 </template>
 
 <script>
-import panHeader from '../panHeader/panHeader'
-import panContent from '../panContent/panContent'
+import panHeader from '../panHeader/panHeader';
+import panContent from '../panContent/panContent';
 
 export default {
     name: 'mainPage',
-    components: { 
-        panHeader, 
-        panContent 
+    components: {
+        panHeader,
+        panContent
     },
     methods: {
-      open (link) {
-        this.$electron.shell.openExternal(link)
-      }
+        open(link) {
+            this.$electron.shell.openExternal(link);
+        }
     }
-}
+};
 </script>
 
 <style lang="scss" >
