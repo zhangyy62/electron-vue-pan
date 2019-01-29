@@ -10,13 +10,13 @@
     </div>
 </template>
 
-<script>
-import vTable from '@/basic/v-table/v-table'
-import vbigIconList from '@/basic/v-bigIconList/v-bigIconList'
-import mainContentController from './mainContentController.js';
+<script lang="ts">
+import Vue from 'vue';
+import vTable from '@/basic/v-table/v-table.vue'
+import vbigIconList from '@/basic/v-bigIconList/v-bigIconList.vue'
+import mainContentController from './mainContentController';
 
-
-export default {
+export default Vue.extend({
     name: 'mainContent',
     components: {
         vTable,
@@ -50,7 +50,7 @@ export default {
             }
         };
     }
-}
+});
 </script>
 
 <style lang="scss">

@@ -5,11 +5,12 @@
     </div>
 </template>
 
-<script>
-import panHeader from '../panHeader/panHeader'
-import panContent from '../panContent/panContent'
+<script lang="ts">
+import Vue from 'vue';
+import panHeader from '../panHeader/panHeader.vue'
+import panContent from '../panContent/panContent.vue'
 
-export default {
+export default Vue.extend({
     name: 'mainPage',
     components: { 
         panHeader, 
@@ -20,7 +21,7 @@ export default {
         this.$electron.shell.openExternal(link)
       }
     }
-}
+});
 </script>
 
 <style lang="scss" >

@@ -21,22 +21,24 @@
     </table>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
     name: 'v-table',
     props: {
         data: Array,
         columns: Array,
         filterKey: String
     },
-    data: function () {
+    data() {
         var sortOrders = {}
-        this.columns.forEach(function (key) {
-        sortOrders[key] = 1
+        this.$props.columns.forEach(function (key) {
+            sortOrders[key] = 1
         })
         return {
-        sortKey: '',
-        sortOrders: sortOrders
+            sortKey: 0,
+            sortOrders: sortOrders
         }
     },
     computed: {
@@ -68,12 +70,12 @@ export default {
         }
     },
     methods: {
-        sortBy: function (key) {
-        this.sortKey = key
-        this.sortOrders[key] = this.sortOrders[key] * -1
+        sortBy(key: string): void {
+            this.$data.sortKey = key;
+            this.$data.sortOrders[key] = this.$data.sortOrders[key] * -1
         }
     }
-}
+});
 </script>
 
 <style>

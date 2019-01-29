@@ -6,6 +6,7 @@ import { createPersistedState, createSharedMutations } from 'vuex-electron'
 import modules from './modules'
 
 Vue.use(Vuex)
+declare var process: any;
 
 export default new Vuex.Store({
   modules,

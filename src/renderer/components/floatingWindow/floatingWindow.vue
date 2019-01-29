@@ -7,8 +7,8 @@
   </div>
 </template>
 
-<script>
-const drag = require("electron-drag");
+<script lang="ts">
+import drag from 'electron-drag'
 
 export default {
   name: "floatingWindow",
@@ -16,7 +16,8 @@ export default {
     drag("#floatingWindow");
 
     if (!drag.supported) {
-      document.querySelector("#floatingWindow").style["-webkit-app-region"] =
+      const a = document.querySelector("#floatingWindow");
+      a.attributes["-webkit-app-region"] =
         "drag";
     }
   },

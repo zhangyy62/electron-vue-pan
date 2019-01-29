@@ -5,9 +5,11 @@
 </template>
 
 <script>
-  export default {
-    name: 'pan'
-  }
+import Vue from 'vue';
+
+export default Vue.extend({
+  name: 'pan'
+})
 </script>
 
 <style lang="scss">

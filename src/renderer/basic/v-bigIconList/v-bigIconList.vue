@@ -10,7 +10,9 @@
 </template>
 
 <script>
-export default {
+import Vue from 'vue';
+
+export default Vue.extend({
     name: 'v-bigIconList',
     props: {
         bigIconDatas: Array
@@ -20,7 +22,7 @@ export default {
             
         }
     }
-}
+});
 </script>
 
 <style lang="scss">

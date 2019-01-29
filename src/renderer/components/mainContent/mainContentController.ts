@@ -1,6 +1,6 @@
 class mainContentController {
 
-    computeRows(datas) {
+    computeRows(datas: Array<object>) {
         let width = document.body.offsetWidth - 200;
         let rowFiles = Math.floor(width / 128);
         let rowCount = Math.floor(datas.length / rowFiles);

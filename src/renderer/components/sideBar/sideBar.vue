@@ -29,8 +29,10 @@
     </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+
+export default Vue.extend({
     name: 'sideBar',
     computed:{
         progress() {
@@ -52,7 +54,7 @@ export default {
             this.progressValue = Math.random() * 100;
         }
     }
-}
+});
 </script>
 
 <style lang="scss">
