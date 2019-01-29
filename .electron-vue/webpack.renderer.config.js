@@ -24,7 +24,7 @@ let whiteListedModules = ['vue']
 let rendererConfig = {
   devtool: '#cheap-module-eval-source-map',
   entry: {
-    renderer: path.join(__dirname, '../src/renderer/main.ts')
+    renderer: path.join(__dirname, '../src/renderer/main.js')
   },
   externals: [
     ...Object.keys(dependencies || {}).filter(d => !whiteListedModules.includes(d))
@@ -84,24 +84,6 @@ let rendererConfig = {
             }
           }
         }
-      },
-      {
-          test: /\.ts$/,
-          exclude: /node_modules/,
-          enforce: 'pre',
-          loader: 'tslint-loader',
-          options: {
-            loader: 'tslint-loader',
-            configFile: path.resolve(__dirname, '../tsconfig.json')
-  　　　　　}
-      },
-      {
-          test: /\.tsx?$/,
-          loader: 'ts-loader',
-          exclude: /node_modules/,
-          options: {
-              appendTsSuffixTo: [/\.vue$/],
-          }
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -165,7 +147,7 @@ let rendererConfig = {
       '@': path.join(__dirname, '../src/renderer'),
       'vue$': 'vue/dist/vue.esm.js'
     },
-    extensions: ['.js', '.vue', '.json', '.css', '.node', '.ts']
+    extensions: ['.js', '.vue', '.json', '.css', '.node']
   },
   target: 'electron-renderer'
 }
