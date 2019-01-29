@@ -22,7 +22,7 @@
             border-radius: 5px;
         }
     }
-
+    
     .function-buttons {
        margin-left: 140px;
        display: inline-block;
@@ -35,11 +35,9 @@
             background: rgb(77, 137, 247);
             border-radius: 5px;
             color: white;
-            cursor: pointer;
-            outline: none;
         }
 
-        .new-folder {
+        .new-file {
             width: 100px;
             height: 20px;
             border: 0.5px;
@@ -48,8 +46,6 @@
             margin-left: 5px;
             border-radius: 5px;
             color: rgb(107, 107, 107);
-            cursor: pointer;
-            outline: none;
         }
     }
 
