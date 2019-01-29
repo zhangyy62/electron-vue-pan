@@ -5,14 +5,15 @@
 </template>
 
 <script>
-  export default {
-    name: 'pan'
-  }
+    export default {
+        name: 'pan'
+    };
 </script>
 
 <style lang="scss">
   /* CSS */
   body {
+    user-select: none;
     height: 100vh;
     min-width: 960px;
     min-height: 650px;
@@ -24,8 +25,8 @@
   }
 
   .clearfix:after {
-    content: ''; 
-    display:block; 
+    content: '';
+    display:block;
     clear:both;
   }
 </style>
