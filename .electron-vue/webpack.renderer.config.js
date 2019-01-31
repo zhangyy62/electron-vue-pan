@@ -84,7 +84,8 @@ let rendererConfig = {
             }
           }
         }
-      },   {
+      },
+      {
         test: /\.ts$/,
         exclude: /node_modules/,
         enforce: 'pre',

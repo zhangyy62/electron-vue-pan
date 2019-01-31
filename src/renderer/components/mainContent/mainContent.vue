@@ -13,6 +13,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import vTable from '@/basic/v-table/v-table.vue'
+import { mapActions } from 'vuex'
 import vbigIconList from '@/basic/v-bigIconList/v-bigIconList.vue'
 import mainContentController from './mainContentController';
 
@@ -41,6 +42,8 @@ export default Vue.extend({
             this.rowDatas = this.mainContentController.computeRows(result.data);
             console.log(this.rowDatas);
         })
+        this.$store.dispatch('someAsyncTask')
+        // this.();
     },
     mounted() {
         const that = this;

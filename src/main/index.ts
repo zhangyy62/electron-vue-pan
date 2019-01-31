@@ -1,16 +1,21 @@
 'use strict'
-
 import { app, BrowserWindow, Menu, screen, ipcMain } from 'electron'
-
+import '../renderer/store';
+ /* tslint:disable */ 
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
+
+declare var global: any
+
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
 
 let mainWindow, floatingWindows;
+let template = [];
+
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
@@ -57,7 +62,7 @@ app.on('activate', () => {
   }
 })
 
-const template = [
+ template = [
   {
     label: 'Edit',
     submenu: [
