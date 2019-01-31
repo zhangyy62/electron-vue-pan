@@ -10,7 +10,7 @@ const BabiliWebpackPlugin = require('babili-webpack-plugin')
 
 let mainConfig = {
   entry: {
-    main: path.join(__dirname, '../src/main/index.js')
+    main: path.join(__dirname, '../src/main/index.ts')
   },
   externals: [
     ...Object.keys(dependencies || {})
