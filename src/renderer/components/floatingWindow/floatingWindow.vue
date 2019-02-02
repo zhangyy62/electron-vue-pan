@@ -13,13 +13,30 @@ import drag from 'electron-drag'
 export default {
   name: "floatingWindow",
   mounted() {
-    drag("#floatingWindow");
-
-    if (!drag.supported) {
-      const a = document.querySelector("#floatingWindow");
-      a.attributes["-webkit-app-region"] =
-        "drag";
-    }
+     let win = this.$electron.remote.getCurrentWindow();
+        let biasX = 0;
+        let biasY = 0;
+        let that = this;
+        document.addEventListener('mousedown', function (e) {
+            switch (e.button) {
+                case 0:
+                    biasX = e.x;
+                    biasY = e.y;
+                    document.addEventListener('mousemove', moveEvent);
+                    break;
+                case 2:
+                    that.$electron.ipcRenderer.send('createSuspensionMenu');
+                    break;
+            }
+        });
+         document.addEventListener('mouseup', function () {
+            biasX = 0;
+            biasY = 0;
+            document.removeEventListener('mousemove', moveEvent)
+        });
+         function moveEvent(e) {
+            win.setPosition(e.screenX - biasX, e.screenY - biasY)
+        }
   },
   methods: {
     clickFLWIN() {
