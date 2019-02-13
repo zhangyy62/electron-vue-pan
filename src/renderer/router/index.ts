@@ -4,6 +4,7 @@ import LandindPage from '@/components/LandingPage.vue'
 import vBigIconList from '@/basic/v-bigIconList/v-bigIconList.vue'
 import vTable from '@/basic/v-table/v-table.vue'
 import floatingWindow from '@/components/floatingWindow/floatingWindow.vue'
+import downloadDemo from '@/components/downloadDemo/downloadDemo.vue'
 
 Vue.use(Router)
 
@@ -31,6 +32,11 @@ export default new Router({
       path: '/floating/window',
       name: 'floating-window',
       component: floatingWindow
+    },
+    {
+      path: '/downloaddemo',
+      name: 'downloaddemo',
+      component: downloadDemo
     },
     {
       path: '*',
