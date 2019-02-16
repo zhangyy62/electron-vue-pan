@@ -7,26 +7,45 @@
   </div>
 </template>
 
-<script>
-const drag = require("electron-drag");
+<script lang="ts">
+import Vue from 'vue';
 
-export default {
-  name: "floatingWindow",
-  mounted() {
-    drag("#floatingWindow");
-
-    if (!drag.supported) {
-      document.querySelector("#floatingWindow").style["-webkit-app-region"] =
-        "drag";
+export default Vue.extend({
+    name: 'floatingWindow',
+    mounted() {
+        const win = this.$electron.remote.getCurrentWindow();
+        let biasX = 0;
+        let biasY = 0;
+        function moveEvent(e) {
+            win.setPosition(e.screenX - biasX, e.screenY - biasY);
+        }
+        const that = this;
+        document.addEventListener('mousedown', (e) => {
+            switch (e.button) {
+            case 0:
+                biasX = e.x;
+                biasY = e.y;
+                document.addEventListener('mousemove', moveEvent);
+                break;
+            case 2:
+                that.$electron.ipcRenderer.send('createSuspensionMenu');
+                break;
+            default:
+                break;
+            }
+        });
+        document.addEventListener('mouseup', () => {
+            biasX = 0;
+            biasY = 0;
+            document.removeEventListener('mousemove', moveEvent);
+        });
+    },
+    methods: {
+        clickFLWIN() {
+            this.$electron.ipcRenderer.send('showMainWindow');
+        }
     }
-  },
-  methods: {
-    clickFLWIN() {
-        console.log("dbclick");
-        this.$electron.ipcRenderer.send('showMainWindow');
-    }
-  }
-};
+});
 </script>
 
 <style lang="scss">

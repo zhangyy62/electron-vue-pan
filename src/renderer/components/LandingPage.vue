@@ -2,19 +2,20 @@
  <mainPage></mainPage>
 </template>
 
-<script>
+<script lang="ts">
+  import Vue from 'vue';
   // import SystemInformation from './LandingPage/SystemInformation'
-  import mainPage from './mainPage/mainPage'
+  import mainPage from './mainPage/mainPage.vue';
 
-  export default {
-    name: 'landing-page',
-    components: { mainPage },
-    methods: {
-      open (link) {
-        this.$electron.shell.openExternal(link)
+  export default Vue.extend({
+      name: 'landing-page',
+      components: { mainPage },
+      methods: {
+          open(link: string) {
+              this.$electron.shell.openExternal(link);
+          }
       }
-    }
-  };
+  });
 </script>
 
 <style>

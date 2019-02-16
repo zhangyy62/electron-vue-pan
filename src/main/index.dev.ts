@@ -6,6 +6,7 @@
  */
 
 /* eslint-disable */
+/* tslint:disable */
 
 // Install `electron-debug` with `devtron`
 require('electron-debug')({ showDevTools: true })
@@ -20,5 +21,8 @@ require('electron').app.on('ready', () => {
     })
 })
 
+import '../renderer/store/index.ts';
+
 // Require `main` process to boot app
-require('./index')
+// require('./index')
+import './index.ts'

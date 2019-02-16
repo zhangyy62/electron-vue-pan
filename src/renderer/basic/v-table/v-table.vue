@@ -21,59 +21,62 @@
     </table>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+/* eslint-disable */
+import Vue from 'vue';
+
+export default Vue.extend({
     name: 'v-table',
     props: {
         data: Array,
         columns: Array,
         filterKey: String
     },
-    data: function () {
-        var sortOrders = {}
-        this.columns.forEach(function (key) {
-        sortOrders[key] = 1
-        })
+    data() {
+        const sortOrders = {};
+        this.$props.columns.forEach((key) => {
+            sortOrders[key] = 1;
+        });
         return {
-        sortKey: '',
-        sortOrders: sortOrders
-        }
+            sortKey: 0,
+            sortOrders
+        };
     },
     computed: {
-        filteredData: function () {
-            var sortKey = this.sortKey
-            var filterKey = this.filterKey && this.filterKey.toLowerCase()
-            var order = this.sortOrders[sortKey] || 1
-            var data = this.data
+        filteredData() {
+            const filterKey = this.filterKey && this.filterKey.toLowerCase();
+            const order = this.sortOrders[this.sortKey] || 1;
             if (filterKey) {
-            data = data.filter(function (row) {
-                return Object.keys(row).some(function (key) {
-                return String(row[key]).toLowerCase().indexOf(filterKey) > -1
-                })
-            })
+                this.data = this.data.filter((row) => Object.keys(row).some((key) => String(row[key]).toLowerCase().indexOf(filterKey) > -1));
             }
-            if (sortKey) {
-            data = data.slice().sort(function (a, b) {
-                a = a[sortKey]
-                b = b[sortKey]
-                return (a === b ? 0 : a > b ? 1 : -1) * order
-            })
+            if (this.sortKey) {
+                this.data = this.data.slice().sort((a, b) => {
+                    let count = 0;
+                    if (a[this.sortKey] === b[this.sortKey]) {
+                        count = 0;
+                    } else if (a[this.sortKey] > b[this.sortKey]) {
+                        count = 1;
+                    } else {
+                        count = 1;
+                    }
+                    return count * order;
+                });
             }
-            return data
+            return this.data;
         }
     },
     filters: {
-        capitalize: function (str) {
-        return str.charAt(0).toUpperCase() + str.slice(1)
+        capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
         }
     },
     methods: {
-        sortBy: function (key) {
-        this.sortKey = key
-        this.sortOrders[key] = this.sortOrders[key] * -1
+        sortBy(key: string): void {
+            this.$data.sortKey = key;
+            this.$data.sortOrders[key] = this.$data.sortOrders[key] * -1;
         }
     }
-}
+});
 </script>
 
 <style>

@@ -1,23 +1,33 @@
+/* eslint-disable */
 'use strict'
-
 import { app, BrowserWindow, Menu, screen, ipcMain } from 'electron'
-
+import '../renderer/store';
+ /* tslint:disable */ 
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
+
+declare var global: any
+
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
 
-let mainWindow, floatingWindows;
+let mainWindow, floatingWindows, session, fileDownloadWindow;
+let template = [];
+
 const winURL = process.env.NODE_ENV === 'development'
-  ? `http://localhost:9080`
-  : `file://${__dirname}/index.html`
+    ? `http://localhost:9080/#/home/all/table`
+    : `file://${__dirname}/index.html`;
 
 const floatingWinURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080/#/floating/window`
   : `file://${__dirname}/index.html`
+
+const downloadDemoURL = process.env.NODE_ENV === 'development'
+? `http://localhost:9080/#/downloaddemo`
+: `file://${__dirname}/index.html`
 
 
 function createWindow () {
@@ -41,23 +51,26 @@ function createWindow () {
   const menu = Menu.buildFromTemplate(template)
   Menu.setApplicationMenu(menu)
   if (floatingWindows) floatingWindows.close()
+  session = mainWindow.webContents.session;
+  console.log('main sesson:' + mainWindow.webContents.session);
 }
-
+console.log(app.getVersion())
+console.log(process.versions)
 app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
+});
 
 app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow()
-  }
-})
+    if (mainWindow === null) {
+        createWindow();
+    }
+});
 
-const template = [
+ template = [
   {
     label: 'Edit',
     submenu: [
@@ -137,53 +150,50 @@ const template = [
             floatingWindows = null;
           })
         }
+      },
+      {
+        label: '下载文件',
+        click () {
+          // mainWindow.webContents.downloadURL('https://speed.hetzner.de/10GB.bin');
+          // mainWindow.close();
+          // console.log('sesson: ' + mainWindow.webContents.sesson)
+          // // fileDownload.test();
+          fileDownloadWindow = new BrowserWindow({
+            height: 300,
+            useContentSize: true,
+            width: 600
+          });
+          fileDownloadWindow.loadURL(downloadDemoURL);
+          fileDownloadWindow.on('closed', () => {
+            fileDownloadWindow = null
+          })
+          console.log('sesson: ' + session)
+          // var fileDownload = new FileDownload(fileDownloadWindow.webContents);
+          ipcMain.on('passDownlaod-message', (event, arg) => {
+            console.log('passDownlaod-message');
+            // Event emitter for sending asynchronous messages
+            // console.log('111' + fileDownload.test())
+            event.sender.send('passDownload-reply')
+            // event.returnValue = fileDownload
+          });
+        }
       }
     ]
   },
 ]
 
-if (process.platform === 'darwin') {
-  template.unshift({
-    label: app.getName(),
-    submenu: [
-      { role: 'about' },
-      { type: 'separator' },
-      { role: 'services' },
-      { type: 'separator' },
-      { role: 'hide' },
-      { role: 'hideothers' },
-      { role: 'unhide' },
-      { type: 'separator' },
-      { role: 'quit' }
-    ]
-  })
-
-  // Edit menu
-  template[1].submenu.push(
-    { type: 'separator' },
-    {
-      label: 'Speech',
-      submenu: [
-        { role: 'startspeaking' },
-        { role: 'stopspeaking' }
-      ]
-    }
-  )
-
-  // Window menu
-  template[3].submenu = [
-    { role: 'close' },
-    { role: 'minimize' },
-    { role: 'zoom' },
-    { type: 'separator' },
-    { role: 'front' }
-  ]
-}
-
 ipcMain.on('showMainWindow', () => {
+    floatingWindows.close();
+    createWindow();
+});
+
+ipcMain.on('downloadFile', () => {
   floatingWindows.close();
   createWindow()
 });
+
+
+
 
 /**
  * Auto Updater
