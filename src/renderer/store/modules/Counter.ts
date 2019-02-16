@@ -1,6 +1,6 @@
 const state = {
-  main: 0
-}
+    main: 0
+};
 
 const mutations = {
   DECREMENT_MAIN_COUNTER (state: any) {
@@ -20,7 +20,7 @@ const actions = {
 }
 
 export default {
-  state,
-  mutations,
-  actions
-}
+    state,
+    mutations,
+    actions
+};

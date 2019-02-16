@@ -22,17 +22,18 @@ import FileDownload from '../../../controller/downLoad';
 
 export default Vue.extend({
     name: 'downloadDemo',
-     computed:{
+    computed: {
         progress() {
-            let progress = this.downloadController ? this.downloadController.getProgressValue() : 0;
-            return `width: ${progress}%` ;
+            const progress = this.downloadController
+                ? this.downloadController.getProgressValue() : 0;
+            return `width: ${progress}%`;
         }
     },
     data() {
         return {
             progressValue: 0,
             downloadController: null
-        }
+        };
     },
     methods: {
         clickProgress() {
@@ -50,10 +51,9 @@ export default Vue.extend({
     },
     mounted() {
         this.$electron.ipcRenderer.send('passDownlaod-message');
-        ipcRenderer.on('passDownload-reply', (event, arg) => {
+        ipcRenderer.on('passDownload-reply', () => {
             this.downloadController = new FileDownload(this.progressValue);
-            console.log('passDownlaod-reply')
-        })
+        });
     }
 });
 </script>

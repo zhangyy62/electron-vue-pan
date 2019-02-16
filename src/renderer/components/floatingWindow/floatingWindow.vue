@@ -8,43 +8,44 @@
 </template>
 
 <script lang="ts">
-import drag from 'electron-drag'
+import Vue from 'vue';
 
-export default {
-  name: "floatingWindow",
-  mounted() {
-     let win = this.$electron.remote.getCurrentWindow();
+export default Vue.extend({
+    name: 'floatingWindow',
+    mounted() {
+        const win = this.$electron.remote.getCurrentWindow();
         let biasX = 0;
         let biasY = 0;
-        let that = this;
-        document.addEventListener('mousedown', function (e) {
+        function moveEvent(e) {
+            win.setPosition(e.screenX - biasX, e.screenY - biasY);
+        }
+        const that = this;
+        document.addEventListener('mousedown', (e) => {
             switch (e.button) {
-                case 0:
-                    biasX = e.x;
-                    biasY = e.y;
-                    document.addEventListener('mousemove', moveEvent);
-                    break;
-                case 2:
-                    that.$electron.ipcRenderer.send('createSuspensionMenu');
-                    break;
+            case 0:
+                biasX = e.x;
+                biasY = e.y;
+                document.addEventListener('mousemove', moveEvent);
+                break;
+            case 2:
+                that.$electron.ipcRenderer.send('createSuspensionMenu');
+                break;
+            default:
+                break;
             }
         });
-         document.addEventListener('mouseup', function () {
+        document.addEventListener('mouseup', () => {
             biasX = 0;
             biasY = 0;
-            document.removeEventListener('mousemove', moveEvent)
+            document.removeEventListener('mousemove', moveEvent);
         });
-         function moveEvent(e) {
-            win.setPosition(e.screenX - biasX, e.screenY - biasY)
+    },
+    methods: {
+        clickFLWIN() {
+            this.$electron.ipcRenderer.send('showMainWindow');
         }
-  },
-  methods: {
-    clickFLWIN() {
-        console.log("dbclick");
-        this.$electron.ipcRenderer.send('showMainWindow');
     }
-  }
-};
+});
 </script>
 
 <style lang="scss">

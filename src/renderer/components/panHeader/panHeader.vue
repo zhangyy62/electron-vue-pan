@@ -11,8 +11,8 @@
             </div>
             <div class="function-right-buttons clearfix">
                 <input type="search" class="search" placeholder="搜索"/>
-                <router-link to="/foo"><input type="button" class="button"  value="1"/></router-link>
-                <router-link to="/bar"><input type="button" class="button"  value="2"/></router-link>
+                <router-link to="/home/all/table"><input type="button" class="button"  value="1"/></router-link>
+                <router-link to="/home/all/bar"><input type="button" class="button"  value="2"/></router-link>
                 <input type="button" class="button refresh"  value=""/>
             </div>
         </div>

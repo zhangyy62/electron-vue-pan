@@ -12,10 +12,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import vTable from '@/basic/v-table/v-table.vue'
-import { mapActions } from 'vuex'
-import vbigIconList from '@/basic/v-bigIconList/v-bigIconList.vue'
-import mainContentController from './mainContentController';
+import vTable from '@/basic/v-table/v-table.vue';
+import vbigIconList from '@/components/v-bigIconList/v-bigIconList.vue';
+import MainContentController from './mainContentController';
 
 export default Vue.extend({
     name: 'mainContent',
@@ -29,27 +28,24 @@ export default Vue.extend({
             searchQuery: '',
             gridColumns: ['name', 'size', 'date'],
             gridData: null,
-            mainContentController,
+            MainContentController,
             rowDatas: null,
             screenWidth: document.body.offsetWidth
-        }
+        };
     },
     created() {
-        this.$http.get('/static/mock/fileList.json', {})
-        .then((result) => {
-            console.log(result);
+        this.$http.get('/static/mock/fileList.json', {}).then((result) => {
             this.gridData = result.data;
-            this.rowDatas = this.mainContentController.computeRows(result.data);
-            console.log(this.rowDatas);
-        })
-        this.$store.dispatch('someAsyncTask')
+            this.rowDatas = this.MainContentController.computeRows(result.data);
+        });
+        this.$store.dispatch('someAsyncTask');
         // this.();
     },
     mounted() {
         const that = this;
         window.onresize = function temp() {
             if (that.gridData) {
-                that.rowDatas = that.mainContentController.computeRows(that.gridData);
+                that.rowDatas = that.MainContentController.computeRows(that.gridData);
             }
         };
     }
@@ -60,7 +56,7 @@ export default Vue.extend({
     .main-content {
         height: 100%;
         width: 100%;
-        background: rgb(244, 244, 244);
+        background: rgb(255, 255, 255);
         overflow: auto;
 
         .content-title {
@@ -87,7 +83,7 @@ export default Vue.extend({
         }
 
         .content {
-            background: rgb(244, 244, 244);
+            background: rgb(255, 255, 255);
             margin-top: 25px;
         }
     }

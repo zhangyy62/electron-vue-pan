@@ -7,14 +7,14 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import sideBar from '../sideBar/sideBar.vue'
-import mainContent from '../mainContent/mainContent.vue'
+import sideBar from '../sideBar/sideBar.vue';
+import mainContent from '../mainContent/mainContent.vue';
 
 export default Vue.extend({
     name: 'panContent',
-    components: { 
-        sideBar, 
-        mainContent 
+    components: {
+        sideBar,
+        mainContent
     }
 });
 </script>

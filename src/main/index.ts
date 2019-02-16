@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use strict'
 import { app, BrowserWindow, Menu, screen, ipcMain } from 'electron'
 import '../renderer/store';
@@ -17,8 +18,8 @@ let mainWindow, floatingWindows, session, fileDownloadWindow;
 let template = [];
 
 const winURL = process.env.NODE_ENV === 'development'
-  ? `http://localhost:9080`
-  : `file://${__dirname}/index.html`
+    ? `http://localhost:9080/#/home/all/table`
+    : `file://${__dirname}/index.html`;
 
 const floatingWinURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080/#/floating/window`
@@ -58,16 +59,16 @@ console.log(process.versions)
 app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
+    if (process.platform !== 'darwin') {
+        app.quit();
+    }
+});
 
 app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow()
-  }
-})
+    if (mainWindow === null) {
+        createWindow();
+    }
+});
 
  template = [
   {
@@ -182,8 +183,8 @@ app.on('activate', () => {
 ]
 
 ipcMain.on('showMainWindow', () => {
-  floatingWindows.close();
-  createWindow()
+    floatingWindows.close();
+    createWindow();
 });
 
 ipcMain.on('downloadFile', () => {

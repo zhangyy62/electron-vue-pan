@@ -1,18 +1,18 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
-import { createPersistedState, createSharedMutations } from 'vuex-electron'
+import { createPersistedState, createSharedMutations } from 'vuex-electron';
 
-import modules from './modules'
+import modules from './modules';
 
 Vue.use(Vuex)
 declare var process: any;
 
 export default new Vuex.Store({
-  modules,
-  plugins: [
-    createPersistedState(),
-    createSharedMutations()
-  ],
-  strict: process.env.NODE_ENV !== 'production'
-})
+    modules,
+    plugins: [
+        createPersistedState(),
+        createSharedMutations()
+    ],
+    strict: process.env.NODE_ENV !== 'production'
+});

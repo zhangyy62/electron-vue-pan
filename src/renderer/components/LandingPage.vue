@@ -5,16 +5,16 @@
 <script lang="ts">
   import Vue from 'vue';
   // import SystemInformation from './LandingPage/SystemInformation'
-  import mainPage from './mainPage/mainPage.vue'
+  import mainPage from './mainPage/mainPage.vue';
 
   export default Vue.extend({
-    name: 'landing-page',
-    components: { mainPage },
-    methods: {
-      open (link: string) {
-        this.$electron.shell.openExternal(link)
+      name: 'landing-page',
+      components: { mainPage },
+      methods: {
+          open(link: string) {
+              this.$electron.shell.openExternal(link);
+          }
       }
-    }
   });
 </script>
 
