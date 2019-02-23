@@ -79,7 +79,7 @@ export default Vue.extend({
 });
 </script>
 
-<style>
+<style scoped>
 table {
   border: 1px solid rgb(250, 250, 250);
   border-radius: 3px;
