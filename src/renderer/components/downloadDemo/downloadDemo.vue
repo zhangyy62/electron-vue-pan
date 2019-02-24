@@ -52,7 +52,7 @@ export default Vue.extend({
     mounted() {
         this.$electron.ipcRenderer.send('passDownlaod-message');
         ipcRenderer.on('passDownload-reply', () => {
-            this.downloadController = new FileDownload(this.progressValue);
+            this.downloadController = new FileDownload(this.progressValue, '');
         });
     }
 });

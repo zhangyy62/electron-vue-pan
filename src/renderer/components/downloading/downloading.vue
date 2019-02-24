@@ -2,8 +2,7 @@
     <table class="downloading">
         <thead>
             <tr>
-                <th v-for="key in columns"
-                >
+                <th v-for="key in columns">
                 {{key}}
                 </th>
             </tr>
@@ -12,16 +11,16 @@
             <tr v-for="data in datas">
                 <td v-for="key in columns">
                     <span v-if="key === '文件名'">{{data[key]}}</span>
-                    <span v-else-if="key === '大小'">{{data[key]}}</span>
+                    <span v-else-if="key === '大小'">{{`${data.downloaded}MB / ${data.total}MB`}}</span>
                     <span v-else-if="key === '状态'">
                        <div class="progress-layout">
                             <div class="progress" >
-                                <div class="bar" v-bind:style="'width: ' + data[key] +'%'"></div>
+                                <div class="bar" :style="data.controller ? data.controller.getFullProgressValue() + '' : 0 + '%'"></div>
                             </div>
                     </div>
                     </span>
                     <span v-else-if="key === '操作'">
-                        <button>开始</button>
+                        <button v-on:click="clickDownload(data)">{{data.downloading ? '开始' : '暂停'}}</button>
                         <button>删除</button>
                         <button>查看所在位置</button>
                     </span>
@@ -33,7 +32,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import downloadController from '../../../controller/downLoad';
+import FileDownload from '../../../controller/downLoad';
 
 export default Vue.extend({
     name: 'downloading',
@@ -41,14 +40,40 @@ export default Vue.extend({
         return {
             columns: ['文件名', '大小', '状态', '操作'],
             datas: [
-                { 文件名: '2131', 大小: '11.21MB / 840.23MB', 状态: '12' }
+                {
+                    文件名: '2131',
+                    大小: '11.21MB / 840.23MB',
+                    状态: '12',
+                    downloading: true,
+                    path: 'https://speed.hetzner.de/100MB.bin',
+                    total: 0,
+                    downloaded: 0,
+                    progress: '0%',
+                    controller: null
+                }
             ],
-            downloadController
+            FileDownload
         };
     },
     methods: {
-        getSize() {
+        clickDownload(item) {
+            const that = item;
+            if (that.downloading) {
+                that.controller.download(that.path);
+            }
+            that.downloading = !that.downloading;
+        },
+        getProgressWidth(item) {
+            const that = item;
+            return `width: ${that.controller ? that.controller.getProgressValue() : 0} %`;
         }
+    },
+    mounted() {
+        this.datas.forEach(item => {
+            const that = item;
+            const controller = new FileDownload(item.downloaded, item.progress);
+            Vue.set(that, 'controller', controller);
+        });
     }
 });
 </script>

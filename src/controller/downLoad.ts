@@ -6,9 +6,16 @@ class FileDownload {
     private progressValue: number = 0;
     private totalBytes: number = 0;
     private receivedBytes: number = 0;
+    private progress: string = '';
 
-    constructor(value: number) {
-        this.progressValue = value;
+    constructor(value: number, progress: string) {
+        this.progress = progress;
+        if (typeof value == "number") {
+            this.progressValue = value;
+        }
+        if (typeof progress == "string") {
+            this.progress = progress;
+        } 
         this.bind();
     }
 
@@ -33,6 +40,7 @@ class FileDownload {
                     this.progressValue = +(item.getReceivedBytes() / item.getTotalBytes() * 100).toFixed(2);
                     console.log(`Received bytes: ${item.getReceivedBytes()}`)
                     console.log(`已下载占比: ${this.progressValue}%`)
+                    this.progress = this.progressValue + '%';
                 }
               }
             })
@@ -70,6 +78,10 @@ class FileDownload {
 
     public getProgressValue(): number {
         return +(this.receivedBytes / this.totalBytes * 100).toFixed(2)
+    }
+
+    public getFullProgressValue(): string {
+        return `width: ${+(this.receivedBytes / this.totalBytes * 100).toFixed(2)}%`;
     }
 }
 
