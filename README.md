@@ -1,28 +1,27 @@
-# pan
+# electron版百度网盘
 
-> personal practice
+## 项目介绍
+用electron + vue2.x开发简易百度网盘PC版，实现简易界面和交互。
 
-#### Build Setup
+## 项目安装
 
 ``` bash
-# install dependencies
-npm install
+# 安装依赖
+npm install / cnpm install
 
-# serve with hot reload at localhost:9080
+# 启动调试
 npm run dev
 
-# build electron application for production
+# 打包
 npm run build
-
-# run unit tests
-npm test
-
-
-# lint all JS/Vue component files in `src/`
-npm run lint
-
 ```
+## 预览
 
----
+#### 主界面1
+![](./assets/pan.gif)
 
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[8fae476](https://github.com/SimulatedGREG/electron-vue/tree/8fae4763e9d225d3691b627e83b9e09b56f6c935) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).
+#### 主界面2
+![](./assets/pan.demo2.gif)
+
+#### 浮动窗口
+![](./assets/pan.demo3.gif)
