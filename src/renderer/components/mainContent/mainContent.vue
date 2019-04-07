@@ -15,6 +15,7 @@ import Vue from 'vue';
 import vTable from '@/basic/v-table/v-table.vue';
 import vbigIconList from '@/components/v-bigIconList/v-bigIconList.vue';
 import MainContentController from './mainContentController';
+import Database from '../../../controller/database';
 
 export default Vue.extend({
     name: 'mainContent',
@@ -30,16 +31,21 @@ export default Vue.extend({
             gridData: null,
             MainContentController,
             rowDatas: null,
-            screenWidth: document.body.offsetWidth
+            screenWidth: document.body.offsetWidth,
+            db: new Database()
         };
     },
     created() {
         this.$http.get('/static/mock/fileList.json', {}).then((result) => {
             this.gridData = result.data;
-            this.rowDatas = this.MainContentController.computeRows(result.data);
+            // this.rowDatas = this.MainContentController.computeRows(result.data);
+            // this.db.insert(this.rowDatas);
+            this.db.read((res) => {
+                this.rowDatas = res.rowDatas;
+                debugger;
+            });
         });
         this.$store.dispatch('someAsyncTask');
-        // this.();
     },
     mounted() {
         const that = this;
