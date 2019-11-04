@@ -27,4 +27,4 @@ npm run build
 ![](./assets/pan.demo3.gif)
 
 ## TODO
- - [ ] 尝试玩玩webassembly
+ - [ ] 尝试玩玩webassembly, 2019.11
