@@ -25,3 +25,6 @@ npm run build
 
 #### 浮动窗口
 ![](./assets/pan.demo3.gif)
+
+## TODO
+ - [ ] 尝试玩玩webassembly
